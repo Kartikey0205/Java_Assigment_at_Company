@@ -1,3 +1,4 @@
+package JavaAssignment;
 import java.util.Scanner;
 
 public class SimpleInterest {

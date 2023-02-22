@@ -20,39 +20,35 @@ public class GetUserInput {
     }
 
     // String Method
-    public void getString(String msg) {
+    public static String getString(String msg) {
         System.out.println(msg);
 
         sc = new Scanner(System.in);
         attempt++;
-
-        if (!sc.hasNextInt() && attempt < 4) {
-            System.out.println("You Entered " + sc.next());
-        } else if (sc.hasNextInt() && attempt < 3) {
-            getString("Enter your String");
-        } else {
-            System.out.println("Sorry you exceed the limit");
-
+        String stringInput = sc.next();
+        try {
+            return stringInput;
+        } catch (Exception e) {
+            validity(attempt);
+            return getString("Choose head or Tail please");
         }
 
     }
 
     // Integer Method
-    public static void getInt(String msg) {
+    public static int getInt(String msg) {
         System.out.println(msg);
         sc = new Scanner(System.in);
-
+        Integer inputiInteger = sc.nextInt();
         attempt++;
         try {
-            int intInput = sc.nextInt();
-            System.out.println("You entered " + intInput);
+            return inputiInteger;
         } catch (Exception e) {
             validity(attempt);
-            getInt("Enter the integer ...");
+            return getInt("Enter your Age");
         }
 
     }
-
     // Character Method
     public void getChar(String msg) {
         System.out.println(msg);
