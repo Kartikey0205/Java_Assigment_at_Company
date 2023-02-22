@@ -1,3 +1,4 @@
+package JavaAssignment;
 import java.util.Scanner;
 
 // static k andr nonstatic can't call
