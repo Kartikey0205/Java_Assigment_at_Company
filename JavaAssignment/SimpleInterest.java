@@ -1,4 +1,5 @@
 package JavaAssignment;
+
 import java.util.Scanner;
 
 public class SimpleInterest {
@@ -49,7 +50,7 @@ public class SimpleInterest {
         double rate = getRate();
         double time = getTime();
 
-        double result = multiplyPRT(principle, rate , time) / ConstantCalculation.divideByHundred;
+        double result = multiplyPRT(principle, rate , time) / Constants.divideByHundred;
         displaySimpleInterest(result);
     }
 

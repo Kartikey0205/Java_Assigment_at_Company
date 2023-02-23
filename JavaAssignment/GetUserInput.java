@@ -1,4 +1,5 @@
 package JavaAssignment;
+
 import java.util.Scanner;
 
 // static k andr nonstatic can't call
@@ -45,7 +46,7 @@ public class GetUserInput {
             return inputiInteger;
         } catch (Exception e) {
             validity(attempt);
-            return getInt("Enter your Age");
+            return getInt("Enter valid input");
         }
 
     }
