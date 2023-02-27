@@ -2,11 +2,11 @@ package eCommerce;
 
 import java.util.ArrayList;
 
-public class Book{
-    String name;
-    String description;
-    double price = 0.0; 
-    double taxAmmount = 0.0;
+public class Book implements Item {
+    public String name;
+    public String description;
+    public double price;
+    public double taxAmmount;
 
     Book(String name, String description, double price, double taxAmmount) {
         this.name = name;
@@ -14,6 +14,8 @@ public class Book{
         this.price = price;
         this.taxAmmount = taxAmmount;
     }
-    
+
+
+
 
 }
