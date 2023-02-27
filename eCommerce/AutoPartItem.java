@@ -1,6 +1,7 @@
 package eCommerce;
 
-public class AutoPartItem {
+
+public class AutoPartItem implements Item{
     String name;
     String description;
     double price = 0.0;
