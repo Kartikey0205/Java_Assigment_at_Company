@@ -3,10 +3,7 @@ package eCommerce;
 import java.util.ArrayList;
 
 public interface Item {
-    ArrayList<String> autoPartItemList = new ArrayList<> ();
-    ArrayList<Book> bookItemList = new ArrayList<> ();
-    abstract void addItem(int a);
-    abstract void removeItem(int a);
-    abstract void calculatePrice();
-    abstract void calculatePriceWithTax();
+    ArrayList<Book> bookItemList = new ArrayList<Book> ();
+    ArrayList<AutoPartItem> autoPartItems = new ArrayList<AutoPartItem>();
+
 }
