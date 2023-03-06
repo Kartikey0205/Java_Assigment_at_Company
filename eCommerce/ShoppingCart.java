@@ -1,62 +1,94 @@
 package eCommerce;
 
-import java.util.*;
+import java.util.ArrayList;
+
+import JavaAssignment.*;
 
 public class ShoppingCart {
-    // String name;//
-    // String description = "dhfb";//
-    // double price = 0.0; //
-    // double taxAmmount = 0.0;//
-    public static Scanner input = new Scanner(System.in);
-    // List<ShoppingCart> items = new ArrayList<ShoppingCart>(); //
-    public static ArrayList<Book> bookItems = new ArrayList<Book>();
-    public static ArrayList<AutoPartItem> autoPartItems = new ArrayList<AutoPartItem>();
+
+    static ArrayList<Item> productList = new ArrayList<>();
 
     ShoppingCart() {
-        bookItems.add(new Book("The Free Voice", "English Edition | written by Ravish Kumar", 257, 12));
-        bookItems.add(new Book("Bolna Hi Hai", "Hindi Edition | written by Ravish Kumar", 194, 12));
-        bookItems.add(new Book("Data Structures & Algorithms in JS", "English Edition | written by Federico Kereki",
-                2999, 12));
 
-        // autoPartItems.add(new AutoPartItem("Samsung M32 Back Cover", "Samsung M32
-        // Back Cover made with transperent Silicone", 299, 18));
-        // autoPartItems.add(new AutoPartItem("Bike Phone Mount", "Easy Installation |
-        // Adjustable 360 degree Study & Safe", 249, 18));
-        // autoPartItems.add(new AutoPartItem("36W Quick Charger for Car", "36W Quick
-        // Charger for Car with 2 USB Ports and 1 type-C Port", 349, 18));
+        productList.add(new Book("ComicBook", "English", 20, 19));
+        productList.add(new Book("PoemBook", "Hindi", 10, 100));
+        productList.add(new Book("History", "English", 60, 80));
+        productList.add(new AutoPartItem("carSeat", "Balck Car seat", 5000, 100));
+        productList.add(new AutoPartItem("carWheel", "White wheel", 500, 50));
+        productList.add(new AutoPartItem("carWheel", "White wheel", 800, 50));
+        productList.add(new AutoPartItem("CarMirror", "rear mirror", 250, 10));
+
+        System.out.println("\tItems available are...");
+        showProducts();
+
     }
-    // ShoppingCart(String name, String description, double price, double
-    // taxAmmount) {
-    // this.name = name;
-    // this.description = description;
-    // this.price = price;
-    // this.taxAmmount = taxAmmount;
-    // }
 
-    public static int productsList() {
+    public static void showProducts() {
         int iterator = 1;
-        for (Book item : bookItems) {
-            System.out.println((iterator++) + " - " + item.name);
+
+        for (Item productListItem : productList) {
+            System.out.println((iterator++) + " - " + productListItem.getName());
         }
-        iterator = 0;
-        iterator = input.nextInt();
+
+    }
+
+    public static int getProductsList() {
+        showProducts();
+        int iterator = GetUserInput.getInt("Enter product number which you want");
+        if(iterator > productList.size()){
+            return 0;
+        }
         return iterator;
     }
 
-    public void addItem(int product) {
-        ShoppingCartLineItem.itemsList.add(new ShoppingCartLineItem(bookItems.get(product - 1).name,
-                bookItems.get(product - 1).price, bookItems.get(product - 1).taxAmmount));
+    public static void addItem() {
+        int productNumber = getProductsList();
+        if(productNumber == 0){
+            System.out.println("Invalid item choosed...");
+            return;
+        }
+        Item selectedItem = productList.get(productNumber - 1);
+        boolean present = selectedItem.equalityCheck();
+
+        if (present) {
+            return;
+        } else {
+            ShoppingCartLineItem.cartItemsList.add(new ShoppingCartLineItem(selectedItem.getName(),
+                    selectedItem.getPrice(), selectedItem.getTax(), 1));
+
+        }
+        System.out.println("Item added suceesfully to the cart...");
+
     }
 
-    public void removeItem(int product) {
-        ShoppingCartLineItem.itemsList.remove(product - 1);
+    public static void removeItem() {
+        int productNumber = ShoppingCartLineItem.getRemoveItemNumber();
+        if(productNumber == 0){
+            return;
+        }
+        if (ShoppingCartLineItem.cartItemsList.get(productNumber - 1).count > 1) {
+            ShoppingCartLineItem.cartItemsList.get(productNumber - 1).count--;
+        } else {
+
+            ShoppingCartLineItem.cartItemsList.remove(productNumber - 1);
+        }
     }
 
-    public void calculatePrice() {
-
+    public static void calculatePrice() {
+        double totalPrice = 0;
+        for (int i = 0; i < ShoppingCartLineItem.cartItemsList.size(); i++) {
+            totalPrice += (ShoppingCartLineItem.cartItemsList.get(i).price)
+                    * (ShoppingCartLineItem.cartItemsList.get(i).count);
+        }
+        System.out.println("Total price for added Items = Rs. " + totalPrice);
     }
 
-    public void calculatePriceWithTax() {
-
+    public static void calculatePriceWithTax() {
+        double totalTax = 0;
+        for (int i = 0; i < ShoppingCartLineItem.cartItemsList.size(); i++) {
+            totalTax += (ShoppingCartLineItem.cartItemsList.get(i).taxAmmount)
+                    * (ShoppingCartLineItem.cartItemsList.get(i).count);
+        }
+        System.out.println("Total tax for added Items = Rs. " + totalTax);
     }
 }

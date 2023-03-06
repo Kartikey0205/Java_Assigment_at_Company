@@ -1,9 +1,10 @@
 package eCommerce;
 
-import java.util.ArrayList;
 
-public interface Item {
-    ArrayList<Book> bookItemList = new ArrayList<Book> ();
-    ArrayList<AutoPartItem> autoPartItems = new ArrayList<AutoPartItem>();
-
+public interface Item {    
+    String getName();
+    String getDescription();
+    Double getTax();
+    Double getPrice();
+    Boolean equalityCheck();
 }
